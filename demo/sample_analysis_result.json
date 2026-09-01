@@ -1,0 +1,159 @@
+{
+  "upload": {
+    "filename": "sample.pcap",
+    "status_code": 202,
+    "job_id": "JOB-E2BBE36FEFA165D1"
+  },
+  "parse_packets": 13,
+  "dns_queries": [
+    "a1b2c3.example.com"
+  ],
+  "build_flows": 2,
+  "extract_features": "canonical feature extraction executed for each flow",
+  "run_detectors": [
+    "FLOW-ENSEMBLE",
+    "ML-ISOLATION-FOREST"
+  ],
+  "risk_scoring": [
+    72,
+    50
+  ],
+  "finding_count": 2,
+  "findings": [
+    {
+      "id": "F-0001",
+      "title": "Rare external destination",
+      "tier": "P1",
+      "detector_id": "FLOW-ENSEMBLE",
+      "detector_version": "heuristic-v2",
+      "confidence": 0.72,
+      "risk_score": 72,
+      "source_ip": "192.168.1.10",
+      "dest_ip": "8.8.8.8",
+      "dest_port": 53,
+      "protocol": 17,
+      "first_seen": 1700000000.0,
+      "last_seen": 1700000000.0,
+      "evidence": [
+        "External destination observed in a low-volume flow"
+      ],
+      "contributing_signals": [
+        "P1_RARE_EXTERNAL_DESTINATION"
+      ],
+      "explanation": [
+        "Ensemble decision combined 1 independent signal(s): P1_RARE_EXTERNAL_DESTINATION.",
+        "The external flow contained 1 packet(s), below the low-volume threshold of 3.",
+        "Risk score is 72/100; confidence is 72%. Confidence is evidence strength, not a calibrated probability."
+      ],
+      "calibrated_probability": 0.72,
+      "calibration_method": "raw-score-fallback"
+    },
+    {
+      "id": "F-0002",
+      "title": "Isolation Forest flow anomaly",
+      "tier": "P3",
+      "detector_id": "ML-ISOLATION-FOREST",
+      "detector_version": "iforest-v1.0",
+      "confidence": 0.7514,
+      "risk_score": 50,
+      "source_ip": "192.168.1.10",
+      "dest_ip": "198.51.100.20",
+      "dest_port": 443,
+      "protocol": 6,
+      "first_seen": 1700000001.0,
+      "last_seen": 1700000006.5,
+      "evidence": [
+        "normalized anomaly score: 0.5029",
+        "raw Isolation Forest decision function: -0.0057"
+      ],
+      "contributing_signals": [
+        "ML_ISOLATION_FOREST_ANOMALY"
+      ],
+      "explanation": [
+        "Persisted Isolation Forest (iforest-v1.0) produced anomaly score 0.50; highest deviations: fwd_rev_byte_ratio, bytes_per_packet, packet_size_mean."
+      ],
+      "calibrated_probability": 0.5,
+      "calibration_method": "raw-score-fallback"
+    }
+  ],
+  "dashboard_payload": {
+    "capture_id": "CAP-695B7C3B0020",
+    "parsed_flows": 2,
+    "total_packets": 13,
+    "unsupported_packets": 0,
+    "findings": [
+      {
+        "id": "F-0001",
+        "title": "Rare external destination",
+        "tier": "P1",
+        "detector_id": "FLOW-ENSEMBLE",
+        "detector_version": "heuristic-v2",
+        "confidence": 0.72,
+        "risk_score": 72,
+        "source_ip": "192.168.1.10",
+        "dest_ip": "8.8.8.8",
+        "dest_port": 53,
+        "protocol": 17,
+        "first_seen": 1700000000.0,
+        "last_seen": 1700000000.0,
+        "evidence": [
+          "External destination observed in a low-volume flow"
+        ],
+        "contributing_signals": [
+          "P1_RARE_EXTERNAL_DESTINATION"
+        ],
+        "explanation": [
+          "Ensemble decision combined 1 independent signal(s): P1_RARE_EXTERNAL_DESTINATION.",
+          "The external flow contained 1 packet(s), below the low-volume threshold of 3.",
+          "Risk score is 72/100; confidence is 72%. Confidence is evidence strength, not a calibrated probability."
+        ],
+        "calibrated_probability": 0.72,
+        "calibration_method": "raw-score-fallback"
+      },
+      {
+        "id": "F-0002",
+        "title": "Isolation Forest flow anomaly",
+        "tier": "P3",
+        "detector_id": "ML-ISOLATION-FOREST",
+        "detector_version": "iforest-v1.0",
+        "confidence": 0.7514,
+        "risk_score": 50,
+        "source_ip": "192.168.1.10",
+        "dest_ip": "198.51.100.20",
+        "dest_port": 443,
+        "protocol": 6,
+        "first_seen": 1700000001.0,
+        "last_seen": 1700000006.5,
+        "evidence": [
+          "normalized anomaly score: 0.5029",
+          "raw Isolation Forest decision function: -0.0057"
+        ],
+        "contributing_signals": [
+          "ML_ISOLATION_FOREST_ANOMALY"
+        ],
+        "explanation": [
+          "Persisted Isolation Forest (iforest-v1.0) produced anomaly score 0.50; highest deviations: fwd_rev_byte_ratio, bytes_per_packet, packet_size_mean."
+        ],
+        "calibrated_probability": 0.5,
+        "calibration_method": "raw-score-fallback"
+      }
+    ],
+    "incidents": [
+      {
+        "id": "INC-0001",
+        "source_ip": "192.168.1.10",
+        "title": "Rare external destination",
+        "severity": "P1",
+        "risk_score": 72,
+        "first_seen": 1700000000.0,
+        "last_seen": 1700000000.0,
+        "status": "new",
+        "assignee": null,
+        "notes": ""
+      }
+    ],
+    "capture_started_at": 1700000000.0,
+    "capture_ended_at": 1700000006.5,
+    "error": null
+  }
+}

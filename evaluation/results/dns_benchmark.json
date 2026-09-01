@@ -1,0 +1,35 @@
+{
+  "benign_dns.pcap": {
+    "label": 0,
+    "queries": [
+      "www.example.com",
+      "api.example.com",
+      "cdn.example.com",
+      "mail.example.com"
+    ],
+    "entropy_bits": [
+      0.0,
+      1.585,
+      1.585,
+      2.0
+    ],
+    "mean_entropy_bits": 1.2925
+  },
+  "malicious_dns_tunneling.pcap": {
+    "label": 1,
+    "queries": [
+      "a1b2c3d4e5f6.exfil.invalid",
+      "9f8e7d6c5b4a.exfil.invalid",
+      "001122334455.exfil.invalid",
+      "abcdef012345.exfil.invalid"
+    ],
+    "entropy_bits": [
+      3.585,
+      3.585,
+      2.585,
+      3.585
+    ],
+    "mean_entropy_bits": 3.335
+  },
+  "measured_separation_bits": 2.0425
+}

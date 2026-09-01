@@ -1,0 +1,3 @@
+file,label,scenario,notes
+benign_dns.pcap,0,benign-dns,normal short service labels
+malicious_dns_tunneling.pcap,1,controlled-dns-tunneling,high-entropy left-most labels under reserved invalid domain

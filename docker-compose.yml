@@ -1,0 +1,57 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.backend
+    environment:
+      FLOWCRYPID_ALLOWED_ORIGINS: http://localhost:8080
+      FLOWCRYPID_MAX_UPLOAD_BYTES: 52428800
+      FLOWCRYPID_MAX_PACKETS: 500000
+      FLOWCRYPID_ADMIN_EMAIL: ${FLOWCRYPID_ADMIN_EMAIL:?Set FLOWCRYPID_ADMIN_EMAIL before starting the stack}
+      FLOWCRYPID_ADMIN_PASSWORD: ${FLOWCRYPID_ADMIN_PASSWORD:?Set FLOWCRYPID_ADMIN_PASSWORD before starting the stack}
+      FLOWCRYPID_WORKER_COUNT: ${FLOWCRYPID_WORKER_COUNT:-2}
+      FLOWCRYPID_WORKER_MODE: external
+      FLOWCRYPID_RATE_LIMIT_BACKEND: sqlite
+    volumes:
+      - ./storage:/app/storage
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health/ready')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 2.0
+
+  worker:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.backend
+    command: ["python", "scripts/worker.py"]
+    environment:
+      FLOWCRYPID_ADMIN_EMAIL: ${FLOWCRYPID_ADMIN_EMAIL:?Set FLOWCRYPID_ADMIN_EMAIL before starting the stack}
+      FLOWCRYPID_ADMIN_PASSWORD: ${FLOWCRYPID_ADMIN_PASSWORD:?Set FLOWCRYPID_ADMIN_PASSWORD before starting the stack}
+      FLOWCRYPID_WORKER_MODE: external
+      FLOWCRYPID_RATE_LIMIT_BACKEND: sqlite
+      FLOWCRYPID_WORKER_POLL_SECONDS: ${FLOWCRYPID_WORKER_POLL_SECONDS:-1.0}
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 2.0
+
+  frontend:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.frontend
+      args:
+        VITE_API_BASE_URL: ""
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    restart: unless-stopped

@@ -1,0 +1,26 @@
+{
+  "dataset": "UNSW-NB15",
+  "source": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+  "input_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+  "split_rule": "id % 10: 0-5 train, 6-7 validation, 8-9 test",
+  "partitions": {
+    "train": {
+      "records": 49400,
+      "benign": 22202,
+      "malicious": 27198,
+      "sha256": "1a9c0566f5968ef044ea43e80b2d2c3b215a57a58e851cbdd026ad01102008b7"
+    },
+    "validation": {
+      "records": 16466,
+      "benign": 7400,
+      "malicious": 9066,
+      "sha256": "d501ba1c34ff90aaaf812d653406020393d12b06186508a3820079c10c3ac77b"
+    },
+    "test": {
+      "records": 16466,
+      "benign": 7398,
+      "malicious": 9068,
+      "sha256": "686976ac57dae7fb4c61129c6729123b33aab52b464523bd06ac3510b16da057"
+    }
+  }
+}

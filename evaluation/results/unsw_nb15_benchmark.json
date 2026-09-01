@@ -1,0 +1,37 @@
+{
+  "dataset": "UNSW-NB15",
+  "dataset_source": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+  "published_training_records": 74099,
+  "published_testing_records": 8233,
+  "split_mode": "single published split; disjoint deterministic id-mod-10 holdout",
+  "training_benign_records_used": 33301,
+  "evaluation_benign_records": 3500,
+  "evaluation_malicious_records": 3500,
+  "selection": "first N records per class from the disjoint evaluation partition; deterministic, balanced subset",
+  "feature_mapping": "UNSW-NB15 flow fields mapped to FlowCrypid FEATURE_KEYS; DNS entropy unavailable in UNSW CSV and set to 0 for this benchmark",
+  "model": {
+    "type": "IsolationForest",
+    "n_estimators": 200,
+    "contamination": 0.05,
+    "random_state": 42,
+    "scaler": "RobustScaler"
+  },
+  "confusion_matrix": {
+    "tn": 3324,
+    "fp": 176,
+    "fn": 3195,
+    "tp": 305
+  },
+  "metrics": {
+    "accuracy": 0.5184285714285715,
+    "precision": 0.6340956340956341,
+    "recall": 0.08714285714285715,
+    "f1": 0.15322783220296407,
+    "fpr": 0.05028571428571429,
+    "fnr": 0.9128571428571428
+  },
+  "sha256": {
+    "train": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+    "test": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559"
+  }
+}

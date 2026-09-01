@@ -1,0 +1,108 @@
+{
+  "dataset": "UNSW-NB15",
+  "source": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+  "split_manifest": "/home/ubuntu/flowcryptid_work/flowcrypid-audit-report/evaluation/splits/unsw_nb15/manifest.json",
+  "train_records": 49400,
+  "validation_records": 16466,
+  "test_records": 16466,
+  "fit_benign_records": 22202,
+  "feature_mapping": "UNSW-NB15 flow fields mapped to FlowCrypid canonical features; DNS entropy=0 because the CSV has no DNS query names",
+  "model": {
+    "type": "IsolationForest",
+    "n_estimators": 200,
+    "contamination": 0.05,
+    "random_state": 42,
+    "scaler": "RobustScaler"
+  },
+  "threshold_selection": {
+    "method": "validation F1 maximization over 199 score quantiles",
+    "threshold": -0.13342799944975253,
+    "validation_metrics": {
+      "tn": 4237,
+      "fp": 3163,
+      "fn": 1632,
+      "tp": 7434,
+      "accuracy": 0.7087938782946678,
+      "precision": 0.7015192979145041,
+      "recall": 0.8199867637326274,
+      "f1": 0.7561409754360983,
+      "fpr": 0.42743243243243245,
+      "fnr": 0.1800132362673726
+    }
+  },
+  "test_metrics": {
+    "tn": 4206,
+    "fp": 3192,
+    "fn": 1624,
+    "tp": 7444,
+    "accuracy": 0.7075185230171261,
+    "precision": 0.6998871756299361,
+    "recall": 0.8209086898985444,
+    "f1": 0.7555826228177019,
+    "fpr": 0.43146796431467965,
+    "fnr": 0.17909131010145568
+  },
+  "per_detector_ablations": {
+    "P0_LOW_AND_SLOW_EXFIL": {
+      "tn": 7398,
+      "fp": 0,
+      "fn": 9068,
+      "tp": 0,
+      "accuracy": 0.44928944491679823,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "fnr": 1.0
+    },
+    "P1_RARE_EXTERNAL_DESTINATION": {
+      "tn": 7398,
+      "fp": 0,
+      "fn": 9068,
+      "tp": 0,
+      "accuracy": 0.44928944491679823,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "fnr": 1.0
+    },
+    "P2_DNS_ANOMALY": {
+      "tn": 7398,
+      "fp": 0,
+      "fn": 9068,
+      "tp": 0,
+      "accuracy": 0.44928944491679823,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "fnr": 1.0
+    },
+    "P3_BEACONING": {
+      "tn": 7398,
+      "fp": 0,
+      "fn": 9068,
+      "tp": 0,
+      "accuracy": 0.44928944491679823,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "fnr": 1.0
+    },
+    "P4_STAGING": {
+      "tn": 7398,
+      "fp": 0,
+      "fn": 9061,
+      "tp": 7,
+      "accuracy": 0.4497145633426454,
+      "precision": 1.0,
+      "recall": 0.0007719453021614468,
+      "f1": 0.0015426997245179064,
+      "fpr": 0.0,
+      "fnr": 0.9992280546978386
+    }
+  },
+  "input_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559"
+}
