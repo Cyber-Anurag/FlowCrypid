@@ -122,3 +122,4 @@ env/
 htmlcov/
 .coverage
 .coverage.*
+.ideavo/project
